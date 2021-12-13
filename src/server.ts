@@ -20,7 +20,7 @@ if (!process.env.PORT) {
 
 const uri: string = process.env.MONGO as string;
 
-mongoose.connect(uri, (err: any) => {
+mongoose.connect(uri,{ replicaSet: 'rs' }, (err: any) => {
   if (err) {
     console.log(err.message);
   } else {
