@@ -20,5 +20,5 @@ const HobbiesSchema = new mongoose.Schema(
 );
 
 const Hobbies = mongoose.model<IHobbies>(MODELS.HOBBIES, HobbiesSchema);
-
+Hobbies.createCollection();
 export default Hobbies;
