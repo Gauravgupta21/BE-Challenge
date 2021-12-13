@@ -98,13 +98,10 @@ export class UserService {
   public static deleteUser = async (userId: string): Promise<void> => {
     return await runInTransaction(async (session) => {
       const result = await UserService.findOne({ _id: userId });
-      console.log("User Result:::", result);
-
       if (!result) {
         throw new HttpException(404, "User not found");
       } else {
         let hobbiesIds = result.hobbies;
-        console.log("hobbiesIds", hobbiesIds);
         if (hobbiesIds) {
           await HobbiesService.deleteManyHobbies(hobbiesIds, session);
           await UserService.delete(userId, session);

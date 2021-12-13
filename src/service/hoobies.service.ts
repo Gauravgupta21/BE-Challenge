@@ -58,7 +58,6 @@ export class HobbiesService {
       { _id: { $in: hobbiesIds } },
       { session }
     );
-
     console.log("Hobbes result.deletedCount:::", result.deletedCount);
     if (result && result.deletedCount === 0) {
       throw new HttpException(404, "Hobbies not found");
