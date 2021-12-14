@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { UserService } from "../service/user.service";
 import { UserRequestPayload } from "../command/request.dto";
+import HttpException from "../error-handler/error-exception";
 
 class UserController {
   // #MONGO="mongodb://localhost:27017,localhost:27018,localhost:27019/arriveDb?replicaSet=rs"
@@ -27,6 +28,9 @@ class UserController {
   public find = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const result = await UserService.findOne({ _id: req.params.id });
+      if (!result) {
+        throw new HttpException(404, "User not found");
+      }
       res.send(result);
     } catch (err) {
       next(err);
