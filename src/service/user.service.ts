@@ -119,7 +119,6 @@ export class UserService {
       { _id: mongoose.Types.ObjectId(userId) },
       { session }
     );
-    console.log(":::User deleted ",result)
     if (result && result.deletedCount === 0) {
       throw new HttpException(404, "User not found");
     }
